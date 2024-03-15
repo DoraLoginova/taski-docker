@@ -49,6 +49,16 @@ jobs:
 
     # Запускаем flake8
     - name: Test with flake8 and django tests
+    
+    # Добавляем env-переменные для доступа к БД
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: 8519100
+        POSTGRES_DB: postgres
+        # Сервер БД запущен в Docker, но его порт проброшен на хост
+        # Поэтому подключаемся к 127.0.0.1:5432
+        DB_HOST: 127.0.0.1
+        DB_PORT: 5432
       # Команд стало больше одной; ставим символ | и пишем команды построчно
       run: |
         python -m flake8 backend/
